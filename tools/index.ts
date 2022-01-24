@@ -1,6 +1,8 @@
 // @ts-ignore
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = true;
 import { app, BrowserWindow } from 'electron';
+import isDev from 'electron-is-dev';
+
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
 
 if (require('electron-squirrel-startup')) {
@@ -14,7 +16,7 @@ const createWindow = (): void => {
   });
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
-  mainWindow.webContents.openDevTools({ mode: 'bottom' });
+  if (isDev) mainWindow.webContents.openDevTools({ mode: 'bottom' });
 };
 
 app.on('ready', createWindow);
