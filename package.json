@@ -4,13 +4,14 @@
   "version": "1.0.0",
   "description": "My Electron application description",
   "main": ".webpack/main",
+  "homepage": "./",
   "scripts": {
-    "start": "electron-forge start",
-    "package": "electron-forge package",
-    "make": "electron-forge make",
+    "d": "electron-forge start",
+    "p": "electron-forge package",
+    "m": "electron-forge make",
+    "b": "run-s p m",
     "publish": "electron-forge publish",
-    "lint": "eslint --ext .ts,.tsx .",
-    "ml": "npx @electron-forge/cli make"
+    "lint": "eslint --ext .ts,.tsx ."
   },
   "keywords": [],
   "author": {
@@ -20,6 +21,24 @@
   "license": "MIT",
   "config": {
     "forge": {
+      "plugins": [
+        [
+          "@electron-forge/plugin-webpack",
+          {
+            "mainConfig": "./tools/webpack.main.config.js",
+            "renderer": {
+              "config": "./tools/webpack.renderer.config.js",
+              "entryPoints": [
+                {
+                  "html": "./src/base/index.html",
+                  "js": "./tools/renderer.js",
+                  "name": "main_window"
+                }
+              ]
+            }
+          }
+        ]
+      ],
       "packagerConfig": {},
       "makers": [
         {
@@ -42,24 +61,6 @@
           "name": "@electron-forge/maker-rpm",
           "config": {}
         }
-      ],
-      "plugins": [
-        [
-          "@electron-forge/plugin-webpack",
-          {
-            "mainConfig": "./webpack.main.config.js",
-            "renderer": {
-              "config": "./webpack.renderer.config.js",
-              "entryPoints": [
-                {
-                  "html": "./src/.home/index.html",
-                  "js": "./src/base/renderer.ts",
-                  "name": "main_window"
-                }
-              ]
-            }
-          }
-        ]
       ]
     }
   },
@@ -83,6 +84,7 @@
     "fork-ts-checker-webpack-plugin": "^6.0.1",
     "node-loader": "^2.0.0",
     "node-sass": "^7.0.1",
+    "npm-run-all": "^4.1.5",
     "sass-loader": "^12.4.0",
     "style-loader": "^3.0.0",
     "ts-loader": "^9.2.2",
