@@ -13,11 +13,6 @@ module.exports = {
   plugins: plugins,
   resolve: {
     extensions: ['.js', '.ts', '.jsx', '.tsx', '.css', '.scss'],
-    alias: {
-      // React Hot Loader Patch
-      // 'react-dom': '@hot-loader/react-dom',
-      // Custom Aliases
-      ...require('./webpack.alias.config'),
-    },
+    alias: { ...require('./webpack.alias.config') },
   },
 };

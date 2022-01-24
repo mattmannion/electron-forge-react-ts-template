@@ -1,10 +1,5 @@
 module.exports = {
-  /**
-   * This is the main entry point for your appljkication, it's the first file
-   * that runs in the main process.
-   */
-  entry: './src/webpack/index.ts',
-  // Put your normal webpack config below here
+  entry: './src/base/index.ts',
   module: {
     rules: require('./webpack.rules'),
   },

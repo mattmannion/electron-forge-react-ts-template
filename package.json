@@ -52,8 +52,8 @@
               "config": "./webpack.renderer.config.js",
               "entryPoints": [
                 {
-                  "html": "./src/public/index.html",
-                  "js": "./src/webpack/renderer.ts",
+                  "html": "./src/.home/index.html",
+                  "js": "./src/base/renderer.ts",
                   "name": "main_window"
                 }
               ]

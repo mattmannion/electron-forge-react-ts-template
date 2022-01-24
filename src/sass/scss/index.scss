@@ -1,6 +1,34 @@
 body {
+  font-size: 2em;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
     Arial, sans-serif;
   background-color: black;
   color: white;
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 1em;
+
+  a {
+    color: white;
+
+    transition: all 0.3s;
+
+    &:active,
+    &:hover {
+      color: gray;
+    }
+  }
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 4em;
 }

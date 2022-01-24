@@ -1,3 +1,5 @@
+// @ts-ignore
+process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = true;
 import { app, BrowserWindow } from 'electron';
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
 
