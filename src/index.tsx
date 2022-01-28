@@ -17,7 +17,9 @@ render(
   <Router>
     <Nav />
     <Switch>
-      <Route exact path='/' component={A} />
+      <Route exact path='/'>
+        <A />
+      </Route>
       <Route exact path='/b' component={B} />
     </Switch>
   </Router>,
