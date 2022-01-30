@@ -1,8 +1,8 @@
 import './sass/scss/index.scss';
 import { render } from 'react-dom';
 import { HashRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import { A } from 'src/components/A';
-import { B } from 'src/components/B';
+import { A } from 'client/components/A';
+import { B } from 'client/components/B';
 
 export function Nav() {
   return (

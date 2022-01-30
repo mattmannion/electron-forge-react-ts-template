@@ -1,7 +1,10 @@
-// @ts-ignore
+/* @ts-ignore */
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = true;
-//
+/**************/
 import { app, BrowserWindow, ipcMain } from 'electron';
+import installExtension, {
+  REACT_DEVELOPER_TOOLS,
+} from 'electron-devtools-installer';
 import isDev from 'electron-is-dev';
 
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
@@ -12,15 +15,26 @@ if (require('electron-squirrel-startup')) {
 
 const createWindow = (): void => {
   const mainWindow = new BrowserWindow({
-    height: 600,
-    width: 800,
-    x: -100,
-    y: -100,
+    height: 1010,
+    width: 950,
+    x: -10,
+    y: -10,
+
     webPreferences: { nodeIntegration: true, contextIsolation: false },
   });
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
-  if (isDev) mainWindow.webContents.openDevTools({ mode: 'bottom' });
+  if (isDev) {
+    mainWindow.webContents.openDevTools({ mode: 'bottom' });
+
+    installExtension(REACT_DEVELOPER_TOOLS)
+      .then((name) => {
+        console.log(`Added Extension:  ${name}`);
+      })
+      .catch((err) => {
+        console.log('An error occurred: ', err);
+      });
+  }
 };
 
 ipcMain.on('channel1', function (_e, args) {

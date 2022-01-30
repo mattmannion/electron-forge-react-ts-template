@@ -10,5 +10,6 @@ function createWebpackAliases(aliases) {
 }
 
 module.exports = createWebpackAliases({
-  src: 'src',
+  client: 'src/client',
+  server: 'src/client',
 });

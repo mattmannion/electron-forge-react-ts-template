@@ -1,5 +1,5 @@
 module.exports = {
-  entry: './tools/index.ts',
+  entry: './src/server/main.ts',
   module: {
     rules: require('./webpack.rules'),
   },
