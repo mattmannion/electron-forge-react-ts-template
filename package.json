@@ -25,10 +25,10 @@
         [
           "@electron-forge/plugin-webpack",
           {
-            "mainConfig": "./tools/webpack.main.config.js",
+            "mainConfig": "./webpack/webpack.main.config.js",
             "renderer": {
               "nodeIntergration": false,
-              "config": "./tools/webpack.renderer.config.js",
+              "config": "./webpack/webpack.renderer.config.js",
               "entryPoints": [
                 {
                   "html": "./src/client/base/index.html",

@@ -1,34 +1,31 @@
-/* @ts-ignore */
-process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = true;
-/**************/
-require('dotenv').config();
-import { app, BrowserWindow, ipcMain } from 'electron';
-import installExtension, {
-  REACT_DEVELOPER_TOOLS,
-} from 'electron-devtools-installer';
+import install, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
 import isDev from 'electron-is-dev';
 
+import { app, BrowserWindow } from 'electron';
+import { win_cfg } from 'util/window';
+
+// registers main weback bundles??
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
+process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = true;
 
 if (require('electron-squirrel-startup')) {
   app.quit();
 }
 
-const createWindow = (): void => {
+export function createWindow() {
   const mainWindow = new BrowserWindow({
-    height: 720,
-    width: 972,
-    x: -6,
-    y: 0,
-
+    ...win_cfg({ height: 600, width: 800 }),
     webPreferences: { nodeIntegration: true, contextIsolation: false },
   });
+
+  // I guess this loads webpack bundles??
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
+  // Allows this block of code to be disabled in prod
   if (isDev) {
     mainWindow.webContents.openDevTools({ mode: 'left' });
 
-    installExtension(REACT_DEVELOPER_TOOLS)
+    install(REACT_DEVELOPER_TOOLS)
       .then((name) => {
         console.log(`Added Extension:  ${name}`);
       })
@@ -36,11 +33,15 @@ const createWindow = (): void => {
         console.log('An error occurred: ', err);
       });
   }
-};
+}
 
-ipcMain.on('channel1', function (_e, args) {
-  console.log(args);
-});
+/**
+ * All IPC calls are collected below.
+ * This import is needed here for proper
+ * execution of IPC in the main process.
+ */
+
+import 'server/ipc/IPC_MAIN';
 
 app.on('ready', createWindow);
 

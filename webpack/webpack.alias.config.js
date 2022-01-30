@@ -11,5 +11,6 @@ function createWebpackAliases(aliases) {
 
 module.exports = createWebpackAliases({
   client: 'src/client',
-  server: 'src/client',
+  server: 'src/server',
+  util: 'src/util',
 });

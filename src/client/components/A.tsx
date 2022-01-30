@@ -1,4 +1,5 @@
 import { ipcRenderer } from 'electron';
+import { channel_one } from 'util/ipc_registry';
 
 export function A() {
   return (
@@ -7,7 +8,7 @@ export function A() {
       <button
         className='btn'
         onClick={() => {
-          ipcRenderer.send('channel1');
+          ipcRenderer.send(channel_one, 'it worked');
         }}
       >
         btn
