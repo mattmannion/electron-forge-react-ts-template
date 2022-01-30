@@ -7,6 +7,7 @@
   "homepage": "./",
   "scripts": {
     "d": "electron-forge start",
+    "n": "nodemon --exec electron-forge start",
     "p": "electron-forge package",
     "m": "electron-forge make",
     "b": "run-s p m",
@@ -72,6 +73,7 @@
     "@electron-forge/maker-squirrel": "^6.0.0-beta.63",
     "@electron-forge/maker-zip": "^6.0.0-beta.63",
     "@electron-forge/plugin-webpack": "6.0.0-beta.63",
+    "@types/dotenv": "^8.2.0",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
     "@types/react-router-dom": "^5.3.3",
@@ -87,6 +89,7 @@
     "fork-ts-checker-webpack-plugin": "^6.0.1",
     "node-loader": "^2.0.0",
     "node-sass": "^7.0.1",
+    "nodemon": "^2.0.15",
     "npm-run-all": "^4.1.5",
     "sass-loader": "^12.4.0",
     "style-loader": "^3.0.0",
@@ -94,7 +97,6 @@
     "typescript": "~4.5.4"
   },
   "dependencies": {
-    "@types/dotenv": "^8.2.0",
     "dotenv": "^14.3.2",
     "electron-squirrel-startup": "^1.0.0",
     "react": "^17.0.2",

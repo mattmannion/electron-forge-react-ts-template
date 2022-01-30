@@ -1,6 +1,6 @@
 import { ipcMain } from 'electron';
-import { channel_one } from 'util/ipc_registry';
+import { channel_one, channel_two } from 'util/ipc_registry';
 
-ipcMain.on(channel_one, (_e, args) => {
-  console.log(args);
+ipcMain.on(channel_one, (e) => {
+  e.sender.send(channel_two, 'message message');
 });

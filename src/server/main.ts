@@ -15,7 +15,10 @@ if (require('electron-squirrel-startup')) {
 export function createWindow() {
   const mainWindow = new BrowserWindow({
     ...win_cfg({ height: 600, width: 800 }),
-    webPreferences: { nodeIntegration: true, contextIsolation: false },
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
+    },
   });
 
   // I guess this loads webpack bundles??
