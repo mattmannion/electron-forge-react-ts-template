@@ -1,3 +1,6 @@
+# Custom
+src/server/window_settings.ts
+
 # Logs
 logs
 *.log

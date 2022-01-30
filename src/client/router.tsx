@@ -1,4 +1,5 @@
 import './sass/scss/index.scss';
+require('dotenv').config();
 import { render } from 'react-dom';
 import { HashRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { A } from 'client/components/A';

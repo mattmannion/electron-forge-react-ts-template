@@ -1,6 +1,7 @@
 /* @ts-ignore */
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = true;
 /**************/
+require('dotenv').config();
 import { app, BrowserWindow, ipcMain } from 'electron';
 import installExtension, {
   REACT_DEVELOPER_TOOLS,
@@ -15,17 +16,17 @@ if (require('electron-squirrel-startup')) {
 
 const createWindow = (): void => {
   const mainWindow = new BrowserWindow({
-    height: 1010,
-    width: 950,
-    x: -10,
-    y: -10,
+    height: 720,
+    width: 972,
+    x: -6,
+    y: 0,
 
     webPreferences: { nodeIntegration: true, contextIsolation: false },
   });
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
   if (isDev) {
-    mainWindow.webContents.openDevTools({ mode: 'bottom' });
+    mainWindow.webContents.openDevTools({ mode: 'left' });
 
     installExtension(REACT_DEVELOPER_TOOLS)
       .then((name) => {
