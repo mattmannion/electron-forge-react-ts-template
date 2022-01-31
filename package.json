@@ -8,13 +8,16 @@
   "watch": {
     "s": {
       "patterns": [
-        "src"
+        "src/server",
+        "src/util",
+        "src/db"
       ],
       "extensions": "ts,tsx"
     }
   },
   "scripts": {
-    "d": "ulectron-forge start",
+    "s": "electron-forge start",
+    "d": "npm-watch s",
     "n": "nodemon --exec electron-forge start",
     "p": "electron-forge package",
     "m": "electron-forge make",
