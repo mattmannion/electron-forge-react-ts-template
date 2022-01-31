@@ -10,3 +10,8 @@ const channel_one = 'channel one';
 const channel_two = 'channel two';
 
 export { channel_one, channel_two };
+
+export const channel_db = {
+  send: 'db_send',
+  receive: 'db_receive',
+};
