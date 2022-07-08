@@ -7,10 +7,10 @@ export function A() {
   const [posts, setPosts] = useState<string[]>([]);
 
   useEffect(function () {
-    ipcRenderer.on(channel_two, (_e, data) => {
+    ipcRenderer.on(channel_two, function (_e, data) {
       setMessage(data);
     });
-    ipcRenderer.on(channel_db.receive, (_e, data) => {
+    ipcRenderer.on(channel_db.receive, function (_e, data) {
       console.log(data);
       setPosts(data);
     });
@@ -27,7 +27,7 @@ export function A() {
       <div>A</div>
       <button
         className='btn'
-        onClick={() => {
+        onClick={function () {
           ipcRenderer.send(channel_one);
           ipcRenderer.send(channel_db.send);
         }}
