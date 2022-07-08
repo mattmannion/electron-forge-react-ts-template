@@ -9,9 +9,16 @@ require('dotenv').config();
 
 /** Converts process.env key-value pairs into Ints from Strings */
 function EnvToNum(value: 'H' | 'W' | 'X' | 'Y'): number | undefined {
-  return Number.parseInt(process.env[value]);
+  const v = process.env[value];
+  return v ? Number(v) : undefined;
 }
 
+interface Win_cfg_args {
+  hh: number;
+  ww: number;
+  xx: number;
+  yy: number;
+}
 /**
  * Interface for Window Configurations
  *
@@ -29,8 +36,8 @@ function EnvToNum(value: 'H' | 'W' | 'X' | 'Y'): number | undefined {
 interface Win_cfg {
   height: number;
   width: number;
-  x?: number;
-  y?: number;
+  x: number;
+  y: number;
 }
 
 /**
@@ -53,11 +60,11 @@ interface Win_cfg {
  * @y       { overridden or undefined }
  */
 
-export function win_cfg({ height, width, x, y }: Win_cfg): Win_cfg {
+export function win_cfg({ hh, ww, xx, yy }: Win_cfg_args): Win_cfg {
   return {
-    height: EnvToNum('H') || height,
-    width: EnvToNum('W') || width,
-    x: EnvToNum('X'),
-    y: EnvToNum('Y'),
+    height: EnvToNum('H') !== undefined ? EnvToNum('H') : hh,
+    width: EnvToNum('W') !== undefined ? EnvToNum('W') : ww,
+    x: EnvToNum('X') !== undefined ? EnvToNum('X') : xx,
+    y: EnvToNum('Y') !== undefined ? EnvToNum('Y') : yy,
   };
 }

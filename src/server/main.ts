@@ -14,7 +14,7 @@ if (require('electron-squirrel-startup')) {
 
 export function createWindow() {
   const mainWindow = new BrowserWindow({
-    ...win_cfg({ height: 600, width: 800 }),
+    ...win_cfg({ hh: 720, ww: 950, xx: 1, yy: 0 }),
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
@@ -44,17 +44,18 @@ export function createWindow() {
  * execution of IPC in the main process.
  */
 
-import 'server/ipc/IPC_MAIN';
+// import 'server/ipc/ipc';
+import 'server/ipc/ipc';
 
 app.on('ready', createWindow);
 
-app.on('window-all-closed', () => {
+app.on('window-all-closed', function () {
   if (process.platform !== 'darwin') {
     app.quit();
   }
 });
 
-app.on('activate', () => {
+app.on('activate', function () {
   if (BrowserWindow.getAllWindows().length === 0) {
     createWindow();
   }

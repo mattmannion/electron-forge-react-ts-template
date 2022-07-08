@@ -14,6 +14,12 @@ export function A() {
       console.log(data);
       setPosts(data);
     });
+    return function () {
+      ipcRenderer.removeAllListeners(channel_one);
+      ipcRenderer.removeAllListeners(channel_two);
+      ipcRenderer.removeAllListeners(channel_db.send);
+      ipcRenderer.removeAllListeners(channel_db.receive);
+    };
   }, []);
 
   return (
