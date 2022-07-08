@@ -43,9 +43,7 @@ export function createWindow() {
  * This import is needed here for proper
  * execution of IPC in the main process.
  */
-
-// import 'server/ipc/ipc';
-import 'server/ipc/ipc';
+import 'server/ipc/ipc.channels';
 
 app.on('ready', createWindow);
 

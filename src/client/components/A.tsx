@@ -1,24 +1,25 @@
 import { ipcRenderer } from 'electron';
 import { useEffect, useState } from 'react';
-import { channel_db, channel_one, channel_two } from 'util/ipc_registry';
+import { channel } from 'util/ipc.registry';
+// import { channel_db, channel_one, channel_two } from 'util/ipc_registry';
 
 export function A() {
   const [message, setMessage] = useState<string>('hi');
   const [posts, setPosts] = useState<string[]>([]);
 
   useEffect(function () {
-    ipcRenderer.on(channel_two, function (_e, data) {
+    ipcRenderer.on(channel.message.receive, function (_e, data) {
       setMessage(data);
     });
-    ipcRenderer.on(channel_db.receive, function (_e, data) {
+    ipcRenderer.on(channel.db.receive, function (_e, data) {
       console.log(data);
       setPosts(data);
     });
     return function () {
-      ipcRenderer.removeAllListeners(channel_one);
-      ipcRenderer.removeAllListeners(channel_two);
-      ipcRenderer.removeAllListeners(channel_db.send);
-      ipcRenderer.removeAllListeners(channel_db.receive);
+      ipcRenderer.removeAllListeners(channel.message.send);
+      ipcRenderer.removeAllListeners(channel.message.receive);
+      ipcRenderer.removeAllListeners(channel.db.send);
+      ipcRenderer.removeAllListeners(channel.db.receive);
     };
   }, []);
 
@@ -28,8 +29,8 @@ export function A() {
       <button
         className='btn'
         onClick={function () {
-          ipcRenderer.send(channel_one);
-          ipcRenderer.send(channel_db.send);
+          ipcRenderer.send(channel.message.send);
+          ipcRenderer.send(channel.db.send);
         }}
       >
         btn
