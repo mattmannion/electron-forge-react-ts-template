@@ -17,7 +17,8 @@
   },
   "scripts": {
     "s": "electron-forge start",
-    "d": "npm-watch s",
+    "dev": "npm-watch s",
+    "d": "cmd/dev.sh",
     "n": "nodemon --exec electron-forge start",
     "p": "electron-forge package",
     "m": "electron-forge make",
