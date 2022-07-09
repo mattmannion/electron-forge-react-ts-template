@@ -1,7 +1,6 @@
 import { ipcRenderer } from 'electron';
 import { useEffect, useState } from 'react';
 import { channel } from 'util/ipc.registry';
-// import { channel_db, channel_one, channel_two } from 'util/ipc_registry';
 
 export function A() {
   const [message, setMessage] = useState<string>('hi');

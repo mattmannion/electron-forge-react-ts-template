@@ -5,21 +5,22 @@
   "description": "My Electron application description",
   "main": ".webpack/main",
   "homepage": "./",
-  "watch": {
-    "s": {
-      "patterns": [
-        "src/server",
-        "src/util",
-        "src/db"
-      ],
-      "extensions": "ts,tsx"
-    }
+  "nodemonConfig": {
+    "watch": [
+      "src/**/*"
+    ],
+    "ignore": [
+      ".git",
+      "node_modules/**/*",
+      "src/client"
+    ],
+    "ext": "js,jsx,ts,tsx",
+    "exec": "electron-forge start"
   },
   "scripts": {
     "s": "electron-forge start",
-    "dev": "npm-watch s",
+    "n": "nodemon",
     "d": "cmd/dev.sh",
-    "n": "nodemon --exec electron-forge start",
     "p": "electron-forge package",
     "m": "electron-forge make",
     "b": "run-s p m",
@@ -105,7 +106,6 @@
     "node-loader": "^2.0.0",
     "node-sass": "^7.0.1",
     "npm-run-all": "^4.1.5",
-    "npm-watch": "^0.11.0",
     "sass-loader": "^12.4.0",
     "style-loader": "^3.0.0",
     "ts-loader": "^9.2.2",
@@ -118,6 +118,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "5",
-    "webpack": "^5.67.0"
+    "webpack": "^5.67.0",
+    "webpack-import-glob-loader": "^1.6.3"
   }
 }

@@ -14,6 +14,16 @@ module.exports = [
     },
   },
   {
+    test: /\.ts?$/,
+    exclude: /(node_modules|\.webpack)/,
+    use: {
+      loader: 'ts-loader',
+      options: {
+        transpileOnly: true,
+      },
+    },
+  },
+  {
     test: /\.tsx?$/,
     exclude: /(node_modules|\.webpack)/,
     use: {
@@ -26,5 +36,21 @@ module.exports = [
   {
     test: /\.s[ac]ss$/i,
     use: ['style-loader', 'css-loader', 'sass-loader'],
+  },
+  {
+    test: /\.js$/,
+    use: 'webpack-import-glob-loader',
+  },
+  {
+    test: /\.jsx$/,
+    use: 'webpack-import-glob-loader',
+  },
+  {
+    test: /\.ts$/,
+    use: 'webpack-import-glob-loader',
+  },
+  {
+    test: /\.tsx$/,
+    use: 'webpack-import-glob-loader',
   },
 ];
