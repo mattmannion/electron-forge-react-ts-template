@@ -8,10 +8,8 @@ rules.push({
 
 module.exports = {
   target: 'electron-renderer',
-  module: {
-    rules,
-  },
-  plugins: plugins,
+  plugins,
+  module: { rules },
   resolve: {
     extensions: ['.js', '.ts', '.jsx', '.tsx', '.css', '.scss'],
     alias: { ...require('./webpack.alias.config') },

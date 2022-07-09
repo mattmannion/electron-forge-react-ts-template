@@ -1,0 +1,16 @@
+.btn {
+  margin-top: 1em;
+  font-size: 1em;
+  background-color: white;
+  border: none;
+  border-radius: 0;
+
+  transition: all 0.2s;
+  &:hover {
+    background-color: #aaa;
+  }
+
+  &:active {
+    background-color: #ccc;
+  }
+}

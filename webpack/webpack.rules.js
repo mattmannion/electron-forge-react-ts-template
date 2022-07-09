@@ -1,3 +1,5 @@
+const { MCEP, isDev } = require('./webpack.shared.plugins');
+
 module.exports = [
   {
     test: /native_modules\/.+\.node$/,
@@ -34,8 +36,37 @@ module.exports = [
     },
   },
   {
-    test: /\.s[ac]ss$/i,
-    use: ['style-loader', 'css-loader', 'sass-loader'],
+    test: /\.module\.s[ac]ss$/i,
+    use: [
+      isDev ? 'style-loader' : MCEP.loader,
+      {
+        loader: 'css-loader',
+        options: {
+          modules: true,
+          sourceMap: isDev,
+        },
+      },
+      {
+        loader: 'sass-loader',
+        options: {
+          sourceMap: isDev,
+        },
+      },
+    ],
+  },
+  {
+    test: /\.s(a|c)ss$/,
+    exclude: /\.module.(s(a|c)ss)$/,
+    use: [
+      isDev ? 'style-loader' : MCEP.loader,
+      'css-loader',
+      {
+        loader: 'sass-loader',
+        options: {
+          sourceMap: isDev,
+        },
+      },
+    ],
   },
   {
     test: /\.js$/,
