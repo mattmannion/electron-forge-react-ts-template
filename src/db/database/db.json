@@ -1,3 +1,14 @@
 {
-  "posts": ["hello world", "asdflkasjdf", "11234125"]
+  "posts": [
+    {
+      "id": 1,
+      "title": "first post",
+      "content": "hello world"
+    },
+    {
+      "id": 2,
+      "title": "second post",
+      "content": "hello world"
+    }
+  ]
 }

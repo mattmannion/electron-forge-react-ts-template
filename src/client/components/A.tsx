@@ -1,46 +1,52 @@
+import type { Posts } from 'db/db.types';
 import { ipcRenderer } from 'electron';
 import { useEffect, useState } from 'react';
-import { channel } from 'util/ipc.registry';
+import { chan } from 'util/ipc.registry';
 
 export function A() {
-  const [message, setMessage] = useState<string>('hi');
-  const [posts, setPosts] = useState<string[]>([]);
+  const [message, setMessage] = useState<string>('loading');
+  const [posts, setPosts] = useState<Posts[]>([
+    { id: 0, title: '', content: 'loading...' },
+  ]);
 
   useEffect(function () {
-    ipcRenderer.on(channel.message.receive, function (_e, data) {
+    ipcRenderer.send(chan.message.send);
+    ipcRenderer.send(chan.db.posts.read.many.send);
+
+    ipcRenderer.on(chan.message.receive, function (_e, data) {
       setMessage(data);
     });
-    ipcRenderer.on(channel.db.receive, function (_e, data) {
-      console.log(data);
+    ipcRenderer.on(chan.db.posts.read.many.receive, function (_e, data) {
       setPosts(data);
     });
+
     return function () {
-      ipcRenderer.removeAllListeners(channel.message.send);
-      ipcRenderer.removeAllListeners(channel.message.receive);
-      ipcRenderer.removeAllListeners(channel.db.send);
-      ipcRenderer.removeAllListeners(channel.db.receive);
+      ipcRenderer.removeAllListeners(chan.message.send);
+      ipcRenderer.removeAllListeners(chan.message.receive);
+      ipcRenderer.removeAllListeners(chan.db.posts.read.many.send);
+      ipcRenderer.removeAllListeners(chan.db.posts.read.many.receive);
     };
   }, []);
 
   return (
     <div className='center'>
       <div>A</div>
-      <button
-        className='btn'
-        onClick={function () {
-          ipcRenderer.send(channel.message.send);
-          ipcRenderer.send(channel.db.send);
-        }}
-      >
-        btn
-      </button>
       <br />
       <div>{message}</div>
-      <ul>
-        {posts.length > 0
-          ? posts.map((post, i) => <li key={i}>{post}</li>)
-          : null}
-      </ul>
+      <button className='btn' onClick={function () {}}>
+        btn
+      </button>
+      <div style={{ textAlign: 'center', marginTop: '1em' }}>
+        {posts.length > 0 &&
+          posts.map(({ id, title, content }, i) => (
+            <div key={id}>
+              <div>
+                {title} - {id}
+              </div>
+              <div>{content}</div>
+            </div>
+          ))}
+      </div>
     </div>
   );
 }

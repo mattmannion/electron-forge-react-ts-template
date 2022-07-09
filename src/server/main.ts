@@ -1,4 +1,3 @@
-import install, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
 import isDev from 'electron-is-dev';
 
 import { app, BrowserWindow } from 'electron';
@@ -28,13 +27,16 @@ export function createWindow() {
   if (isDev) {
     mainWindow.webContents.openDevTools({ mode: 'left' });
 
-    install(REACT_DEVELOPER_TOOLS)
-      .then((name) => {
-        console.log(`Added Extension:  ${name}`);
-      })
-      .catch((err) => {
-        console.log('An error occurred: ', err);
-      });
+    // uncomment the block below if you are in need of the react tools
+
+    // import install, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
+    //   install(REACT_DEVELOPER_TOOLS)
+    //     .then((name) => {
+    //       console.log(`Added Extension:  ${name}`);
+    //     })
+    //     .catch((err) => {
+    //       console.log('An error occurred: ', err);
+    //     });
   }
 }
 
@@ -44,6 +46,10 @@ export function createWindow() {
  * execution of IPC in the main process.
  */
 import 'server/ipc/ipc.channels';
+import { lowInit } from 'db/lowdb';
+(async function () {
+  lowInit();
+})();
 
 app.allowRendererProcessReuse = true;
 app.disableHardwareAcceleration();

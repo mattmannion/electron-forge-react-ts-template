@@ -6,13 +6,29 @@
  */
 /** */
 
-export const channel = {
+export const chan = {
   message: {
     send: 'message_send',
     receive: 'message_receive',
   },
   db: {
-    send: 'db_send',
-    receive: 'db_receive',
+    posts: {
+      read: {
+        one: {
+          send: 'db_post_read_one_send',
+          receive: 'db_post_read_one_receive',
+        },
+        many: {
+          send: 'db_post_read_many_send',
+          receive: 'db_post_read_many_receive',
+        },
+      },
+      insert: {
+        one: {
+          send: 'db_post_insert_one_send',
+          receive: 'db_post_insert_one_receive',
+        },
+      },
+    },
   },
 };

@@ -1,6 +1,6 @@
 import { ipcMain } from 'electron';
-import { channel } from 'util/ipc.registry';
+import { chan } from 'util/ipc.registry';
 
-ipcMain.on(channel.message.send, (e) => {
-  e.sender.send(channel.message.receive, 'it mack');
+ipcMain.on(chan.message.send, (e) => {
+  e.sender.send(chan.message.receive, 'ipc working');
 });
