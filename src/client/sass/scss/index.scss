@@ -5,3 +5,46 @@ body {
   background-color: black;
   color: white;
 }
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+
+  a {
+    color: white;
+
+    transition: all 0.3s;
+
+    &:active,
+    &:hover {
+      color: gray;
+    }
+  }
+}
+
+.btn {
+  margin-top: 1em;
+  font-size: 1em;
+  background-color: white;
+  border: none;
+  border-radius: 0;
+
+  transition: all 0.2s;
+  &:hover {
+    background-color: #aaa;
+  }
+
+  &:active {
+    background-color: #ccc;
+  }
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+
+  margin-top: 4em;
+}

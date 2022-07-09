@@ -1,5 +1,3 @@
-import ssb from 'client/components/btns.module';
-import ssp from 'client/components/position.module';
 import { ipcRenderer } from 'electron';
 import { useEffect, useState } from 'react';
 import { channel } from 'util/ipc.registry';
@@ -25,10 +23,10 @@ export function A() {
   }, []);
 
   return (
-    <div className={ssp.center}>
+    <div className='center'>
       <div>A</div>
       <button
-        className={ssb.btn}
+        className='btn'
         onClick={function () {
           ipcRenderer.send(channel.message.send);
           ipcRenderer.send(channel.db.send);

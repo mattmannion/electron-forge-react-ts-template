@@ -5,6 +5,23 @@
   "description": "My Electron application description",
   "main": ".webpack/main",
   "homepage": "./",
+  "license": "MIT",
+  "keywords": [],
+  "author": {
+    "name": "Matt Mannion",
+    "email": "mattpmannion@gmail.com"
+  },
+  "scripts": {
+    "s": "electron-forge start",
+    "n": "nodemon",
+    "d": "cmd/dev.sh",
+    "p": "electron-forge package",
+    "m": "electron-forge make",
+    "b": "run-s p m",
+    "bl": "cmd/build-start-linux.sh",
+    "publish": "electron-forge publish",
+    "lint": "eslint --ext .ts,.tsx ."
+  },
   "nodemonConfig": {
     "watch": [
       "src/**/*"
@@ -17,22 +34,6 @@
     "ext": "js,jsx,ts,tsx",
     "exec": "electron-forge start"
   },
-  "scripts": {
-    "s": "electron-forge start",
-    "n": "nodemon",
-    "d": "cmd/dev.sh",
-    "p": "electron-forge package",
-    "m": "electron-forge make",
-    "b": "run-s p m",
-    "publish": "electron-forge publish",
-    "lint": "eslint --ext .ts,.tsx ."
-  },
-  "keywords": [],
-  "author": {
-    "name": "Matt Mannion",
-    "email": "mattpmannion@gmail.com"
-  },
-  "license": "MIT",
   "config": {
     "forge": {
       "plugins": [
@@ -94,7 +95,6 @@
     "electron": "16.0.7",
     "electron-devtools-installer": "^3.2.0",
     "electron-is-dev": "^2.0.0",
-    "electron-prebuilt-compile": "^8.2.0",
     "eslint": "^8.0.1",
     "eslint-plugin-import": "^2.25.0",
     "fork-ts-checker-webpack-plugin": "^6.0.1",

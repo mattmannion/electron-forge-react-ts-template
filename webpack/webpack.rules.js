@@ -16,17 +16,7 @@ module.exports = [
     },
   },
   {
-    test: /\.ts?$/,
-    exclude: /(node_modules|\.webpack)/,
-    use: {
-      loader: 'ts-loader',
-      options: {
-        transpileOnly: true,
-      },
-    },
-  },
-  {
-    test: /\.tsx?$/,
+    test: /\.(ts|tsx)?$/,
     exclude: /(node_modules|\.webpack)/,
     use: {
       loader: 'ts-loader',
@@ -42,46 +32,24 @@ module.exports = [
       {
         loader: 'css-loader',
         options: {
-          modules: true,
-          sourceMap: isDev,
+          module: true,
         },
       },
       {
         loader: 'sass-loader',
         options: {
-          sourceMap: isDev,
+          module: true,
         },
       },
     ],
   },
   {
-    test: /\.s(a|c)ss$/,
-    exclude: /\.module.(s(a|c)ss)$/,
-    use: [
-      isDev ? 'style-loader' : MCEP.loader,
-      'css-loader',
-      {
-        loader: 'sass-loader',
-        options: {
-          sourceMap: isDev,
-        },
-      },
-    ],
+    test: /\.s[ac]ss$/i,
+    exclude: /\.module\.s[ac]ss$/i,
+    use: [isDev ? 'style-loader' : MCEP.loader, 'css-loader', 'sass-loader'],
   },
   {
-    test: /\.js$/,
-    use: 'webpack-import-glob-loader',
-  },
-  {
-    test: /\.jsx$/,
-    use: 'webpack-import-glob-loader',
-  },
-  {
-    test: /\.ts$/,
-    use: 'webpack-import-glob-loader',
-  },
-  {
-    test: /\.tsx$/,
+    test: /\.(js|jsx|ts|tsx)$/,
     use: 'webpack-import-glob-loader',
   },
 ];
