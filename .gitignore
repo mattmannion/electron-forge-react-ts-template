@@ -1,5 +1,6 @@
 # Custom
 src/server/window_settings.ts
+src/db/database
 
 # Logs
 logs
@@ -90,6 +91,3 @@ typings/
 
 # Electron-Forge
 out/
-
-# DB
-src/db/database/*
