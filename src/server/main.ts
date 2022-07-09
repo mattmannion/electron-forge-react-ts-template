@@ -45,7 +45,6 @@ export function createWindow() {
  */
 import 'server/ipc/ipc.channels';
 
-// @ts-ignore
 app.allowRendererProcessReuse = true;
 app.disableHardwareAcceleration();
 
