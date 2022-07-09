@@ -1,14 +1,14 @@
 {
   "posts": [
     {
-      "id": 1,
+      "id": "e17de443-7e23-461d-9eb8-4bdd6a004a4e",
       "title": "first post",
       "content": "hello world"
     },
     {
-      "id": 2,
+      "id": "f9e4f638-48e5-4c27-99b9-674991bba8b8",
       "title": "second post",
-      "content": "hello world"
+      "content": "more gamers"
     }
   ]
 }

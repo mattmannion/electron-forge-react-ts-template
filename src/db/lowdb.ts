@@ -1,10 +1,11 @@
-import type { Posts } from 'db/db.types';
+import type { Post } from 'db/db.types';
 import { join, dirname } from 'path';
 import { Low, JSONFile } from 'lowdb';
 import { fileURLToPath } from 'url';
+import { v4 } from 'uuid';
 
 interface Data {
-  posts: Posts[];
+  posts: Post[];
 }
 
 const file = join(
@@ -26,7 +27,7 @@ export async function lowInit() {
     db.data = db.data || {
       posts: [
         {
-          id: 1,
+          id: v4(),
           title: 'first post',
           content: 'hello world',
         },
