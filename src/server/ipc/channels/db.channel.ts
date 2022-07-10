@@ -1,8 +1,8 @@
-import { db } from 'db/lowdb';
 import { ipcMain } from 'electron';
+import { db } from 'db/lowdb';
+import { v4 } from 'uuid';
 import { chan } from 'util/ipc.registry';
 import { CatchError } from 'util/util';
-import { v4 } from 'uuid';
 
 ipcMain.on(chan.db.posts.read.many.send, async (e) => {
   try {
