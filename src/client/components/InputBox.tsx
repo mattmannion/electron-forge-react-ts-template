@@ -1,10 +1,12 @@
 import type { Post } from 'db/db.types';
-import { db } from 'db/lowdb';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { v4 } from 'uuid';
 import { ipcRenderer } from 'electron';
 import { chan } from 'util/ipc.registry';
+
+interface InputBox {
+  setPosts: React.Dispatch<React.SetStateAction<Post[]>>;
+}
 
 interface FormError {
   error: string | undefined;
@@ -24,7 +26,18 @@ function Error({ error, touched }: FormError) {
   );
 }
 
-export function InputBox() {
+function submit(
+  setPosts: React.Dispatch<React.SetStateAction<Post[]>>,
+  title: string,
+  content: string
+) {
+  ipcRenderer.send(chan.db.posts.insert.one.send, title, content);
+  ipcRenderer.on(chan.db.posts.insert.one.receive, (_e, data) =>
+    setPosts(data)
+  );
+}
+
+export function InputBox({ setPosts }: InputBox) {
   const {
     values,
     errors,
@@ -45,22 +58,8 @@ export function InputBox() {
     }),
 
     onSubmit: async function ({ title, content }) {
-      try {
-        await db.read();
-
-        db.data.posts.push({
-          id: v4(),
-          title: title.trim(),
-          content: content.trim(),
-        });
-
-        await db.write();
-        ipcRenderer.send(chan.db.posts.read.many.send);
-
-        resetForm();
-      } catch (error) {
-        console.log((error as Error).message);
-      }
+      submit(setPosts, title, content);
+      resetForm();
     },
   });
 

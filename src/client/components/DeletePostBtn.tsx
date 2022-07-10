@@ -8,7 +8,7 @@ interface DeletePostBtn extends Post {
   setPosts: React.Dispatch<React.SetStateAction<Post[]>>;
 }
 
-async function delete_post(
+function delete_post(
   e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   handleClose: () => void,
   setPosts: React.Dispatch<React.SetStateAction<Post[]>>,

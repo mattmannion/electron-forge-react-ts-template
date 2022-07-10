@@ -36,7 +36,7 @@ function submit(
   content: string
 ) {
   ipcRenderer.send(chan.db.posts.edit.one.send, id, title, content);
-  ipcRenderer.on(chan.db.posts.edit.one.receive, (e, data) => setPosts(data));
+  ipcRenderer.on(chan.db.posts.edit.one.receive, (_e, data) => setPosts(data));
 }
 
 export function EditPostModal({ setPosts, id, title, content }: EditPostModal) {
@@ -57,12 +57,8 @@ export function EditPostModal({ setPosts, id, title, content }: EditPostModal) {
         content: yup.string().required('Must enter some content'),
       }),
 
-      onSubmit: async function ({ title, content }) {
-        try {
-          submit(setPosts, id, title, content);
-        } catch (error) {
-          console.log((error as Error).message);
-        }
+      onSubmit: function ({ title, content }) {
+        submit(setPosts, id, title, content);
       },
     });
 

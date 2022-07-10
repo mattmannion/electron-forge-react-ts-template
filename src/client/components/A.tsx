@@ -44,7 +44,7 @@ export function A() {
         send something
       </button>
       <br />
-      <InputBox />
+      <InputBox setPosts={setPosts} />
       <Posts
         setPosts={setPosts}
         posts={posts.sort((a, b) => (b.id > a.id ? 1 : -1))}
