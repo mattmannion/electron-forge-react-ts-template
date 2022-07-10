@@ -1,6 +1,6 @@
 import type { Post } from 'db/db.types';
-import { EditPostModal } from 'client/components/EditPostModal';
-import { DeletePostBtn } from 'client/components/DeletePostBtn';
+import { DeletePostBtn } from 'client/app/A/DeletePostBtn';
+import { EditPostModal } from 'client/app/A/EditPostModal';
 
 interface Posts {
   posts: Post[];

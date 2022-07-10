@@ -1,5 +1,5 @@
-import { InputBox } from 'client/components/InputBox';
-import { Posts } from 'client/components/Posts';
+import { InputBox } from 'client/app/A/InputBox';
+import { Posts } from 'client/app/A/Posts';
 import type { Post } from 'db/db.types';
 import { ipcRenderer } from 'electron';
 import { useEffect, useState } from 'react';

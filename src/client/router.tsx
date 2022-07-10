@@ -3,8 +3,8 @@ import 'client/sass/scss';
 require('dotenv').config();
 import { render } from 'react-dom';
 import { MemoryRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import { A } from 'client/components/A';
-import { B } from 'client/components/B';
+import { A } from 'client/app/A/A';
+import { B } from 'client/app/B/B';
 
 const Nav = () => (
   <div className='nav'>
