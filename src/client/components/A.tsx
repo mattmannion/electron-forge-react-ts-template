@@ -1,24 +1,9 @@
 import { InputBox } from 'client/components/InputBox';
+import { Posts } from 'client/components/Posts';
 import type { Post } from 'db/db.types';
-import { db } from 'db/lowdb';
 import { ipcRenderer } from 'electron';
 import { useEffect, useState } from 'react';
 import { chan } from 'util/ipc.registry';
-
-async function delete_post(
-  e: React.MouseEvent<HTMLDivElement, MouseEvent>,
-  del_id: string
-) {
-  e.preventDefault();
-
-  await db.read();
-
-  db.data.posts = db.data.posts.filter(({ id }) => id !== del_id);
-
-  await db.write();
-
-  ipcRenderer.send(chan.db.posts.read.many.send);
-}
 
 export function A() {
   const [message, setMessage] = useState<string>('loading');
@@ -50,21 +35,7 @@ export function A() {
       <div>{message}</div>
       <br />
       <InputBox />
-      <div style={{ textAlign: 'center', marginTop: '1em' }}>
-        {posts.length > 0 &&
-          posts.map(({ id, title, content }) => (
-            <div key={id} className='center'>
-              <div>{title}</div>
-              <div>{content}</div>
-              <div
-                style={{ cursor: 'pointer', width: 'min-content' }}
-                onClick={(e) => delete_post(e, id)}
-              >
-                x
-              </div>
-            </div>
-          ))}
-      </div>
+      <Posts posts={posts.sort((a, b) => (b.id > a.id ? 1 : -1))} />
     </div>
   );
 }

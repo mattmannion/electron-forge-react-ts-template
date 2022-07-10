@@ -65,7 +65,7 @@ export function InputBox() {
   });
 
   return (
-    <form onSubmit={handleSubmit} className='center'>
+    <form className='center' onSubmit={handleSubmit}>
       <div>New Post</div>
       <br />
       <div

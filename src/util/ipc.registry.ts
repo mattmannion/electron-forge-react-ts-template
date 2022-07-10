@@ -29,6 +29,18 @@ export const chan = {
           receive: 'db_post_insert_one_receive',
         },
       },
+      edit: {
+        one: {
+          send: 'db_post_edit_one_send',
+          receive: 'db_post_edit_one_receive',
+        },
+      },
+      delete: {
+        one: {
+          send: 'db_post_delete_one_send',
+          receive: 'db_post_delete_one_receive',
+        },
+      },
     },
   },
 };

@@ -1,3 +1,4 @@
+import 'client/sass/scss/bs';
 import 'client/sass/scss';
 require('dotenv').config();
 import { render } from 'react-dom';
