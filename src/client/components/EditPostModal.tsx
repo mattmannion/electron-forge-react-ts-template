@@ -1,11 +1,14 @@
 import type { Post } from 'db/db.types';
 import { useState } from 'react';
-import { db } from 'db/lowdb';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { ipcRenderer } from 'electron';
 import { chan } from 'util/ipc.registry';
 import Modal from 'react-bootstrap/esm/Modal';
+
+interface EditPostModal extends Post {
+  setPosts: React.Dispatch<React.SetStateAction<Post[]>>;
+}
 
 interface FormError {
   error: string | undefined;
@@ -26,57 +29,42 @@ function Error({ error, touched }: FormError) {
   );
 }
 
-export function EditPostModal({ id, title, content }: Post) {
+function submit(
+  setPosts: React.Dispatch<React.SetStateAction<Post[]>>,
+  id: string,
+  title: string,
+  content: string
+) {
+  ipcRenderer.send(chan.db.posts.edit.one.send, id, title, content);
+  ipcRenderer.on(chan.db.posts.edit.one.receive, (e, data) => setPosts(data));
+}
+
+export function EditPostModal({ setPosts, id, title, content }: EditPostModal) {
   const [show, setShow] = useState<boolean>(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const {
-    values,
-    errors,
-    touched,
-    handleChange,
-    handleSubmit,
-    resetForm,
-    handleBlur,
-  } = useFormik<Post>({
-    initialValues: {
-      title,
-      content,
-    },
+  const { values, errors, touched, handleChange, handleSubmit, handleBlur } =
+    useFormik<Post>({
+      initialValues: {
+        title,
+        content,
+      },
 
-    validationSchema: yup.object({
-      title: yup.string().required('Must enter a title'),
-      content: yup.string().required('Must enter some content'),
-    }),
+      validationSchema: yup.object({
+        title: yup.string().required('Must enter a title'),
+        content: yup.string().required('Must enter some content'),
+      }),
 
-    onSubmit: async function ({ title, content }) {
-      try {
-        await db.read();
-
-        const { posts } = db.data;
-        const edited_post = posts.filter((f) => f.id === id)[0];
-
-        edited_post.title = title.trim();
-        edited_post.content = content.trim();
-
-        const previous_posts = posts.filter((f) => f.id !== id);
-
-        previous_posts.push(edited_post);
-
-        db.data.posts = previous_posts;
-
-        await db.write();
-
-        ipcRenderer.send(chan.db.posts.read.many.send);
-
-        // resetForm();
-      } catch (error) {
-        console.log((error as Error).message);
-      }
-    },
-  });
+      onSubmit: async function ({ title, content }) {
+        try {
+          submit(setPosts, id, title, content);
+        } catch (error) {
+          console.log((error as Error).message);
+        }
+      },
+    });
 
   return (
     <>

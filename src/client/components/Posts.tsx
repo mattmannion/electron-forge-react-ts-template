@@ -20,7 +20,7 @@ export function Posts({ posts, setPosts }: Posts) {
             <div>{post.title}</div>
             <div>{post.content}</div>
             <DeletePostBtn setPosts={setPosts} {...post} />
-            <EditPostModal {...post} />
+            <EditPostModal setPosts={setPosts} {...post} />
           </div>
         ))}
     </div>

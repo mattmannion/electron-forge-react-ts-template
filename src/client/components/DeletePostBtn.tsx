@@ -1,5 +1,4 @@
 import type { Post } from 'db/db.types';
-import { db } from 'db/lowdb';
 import { ipcRenderer } from 'electron';
 import { useState } from 'react';
 import Modal from 'react-bootstrap/esm/Modal';
