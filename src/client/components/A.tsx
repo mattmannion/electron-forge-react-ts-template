@@ -12,7 +12,7 @@ export function A() {
   ]);
 
   useEffect(() => {
-    ipcRenderer.send(chan.message.send);
+    ipcRenderer.send(chan.message.send, 'a message from react');
     ipcRenderer.send(chan.db.posts.read.many.send);
 
     ipcRenderer.on(chan.message.receive, (_e, data) => setMessage(data));
@@ -25,6 +25,8 @@ export function A() {
       ipcRenderer.removeAllListeners(chan.message.receive);
       ipcRenderer.removeAllListeners(chan.db.posts.read.many.send);
       ipcRenderer.removeAllListeners(chan.db.posts.read.many.receive);
+      ipcRenderer.removeAllListeners(chan.db.posts.delete.one.send);
+      ipcRenderer.removeAllListeners(chan.db.posts.delete.one.receive);
     };
   }, []);
 
@@ -32,10 +34,21 @@ export function A() {
     <div className='center'>
       <div>A</div>
       <br />
-      <div>{message}</div>
+      {/* <div>{message}</div> */}
+      <button
+        className='btn'
+        onClick={() => {
+          ipcRenderer.send(chan.message.send, 'a message from react');
+        }}
+      >
+        send something
+      </button>
       <br />
       <InputBox />
-      <Posts posts={posts.sort((a, b) => (b.id > a.id ? 1 : -1))} />
+      <Posts
+        setPosts={setPosts}
+        posts={posts.sort((a, b) => (b.id > a.id ? 1 : -1))}
+      />
     </div>
   );
 }

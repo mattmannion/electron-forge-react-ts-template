@@ -5,23 +5,26 @@ import { useState } from 'react';
 import Modal from 'react-bootstrap/esm/Modal';
 import { chan } from 'util/ipc.registry';
 
+interface DeletePostBtn extends Post {
+  setPosts: React.Dispatch<React.SetStateAction<Post[]>>;
+}
+
 async function delete_post(
   e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  handleClose: () => void,
+  setPosts: React.Dispatch<React.SetStateAction<Post[]>>,
   del_id: string
 ) {
   e.preventDefault();
 
-  await db.read();
+  ipcRenderer.send(chan.db.posts.delete.one.send, del_id);
+  ipcRenderer.on(chan.db.posts.delete.one.receive, (e, data) => setPosts(data));
 
-  db.data.posts = db.data.posts.filter(({ id }) => id !== del_id);
-
-  await db.write();
-
-  ipcRenderer.send(chan.db.posts.read.many.send);
+  handleClose();
 }
 
-export function DeletePostBtn({ id, title, content }: Post) {
-  const [show, setShow] = useState(false);
+export function DeletePostBtn({ id, setPosts }: DeletePostBtn) {
+  const [show, setShow] = useState<boolean>(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -55,7 +58,7 @@ export function DeletePostBtn({ id, title, content }: Post) {
                 width: 'min-content',
                 backgroundColor: 'green',
               }}
-              onClick={(e) => delete_post(e, id)}
+              onClick={(e) => delete_post(e, handleClose, setPosts, id)}
               className='btn'
             >
               yes
