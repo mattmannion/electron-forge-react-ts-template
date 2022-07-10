@@ -1,5 +1,5 @@
 import { ipcMain } from 'electron';
-import { db } from 'db/lowdb';
+import { db } from 'db/db';
 import { v4 } from 'uuid';
 import { chan } from 'util/ipc.registry';
 import { CatchError } from 'util/util';

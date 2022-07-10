@@ -46,7 +46,7 @@ export function createWindow() {
  * execution of IPC in the main process.
  */
 import 'server/ipc/ipc.channels';
-import { lowInit } from 'db/lowdb';
+import { lowInit } from 'db/db';
 (async function () {
   lowInit();
 })();
