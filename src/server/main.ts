@@ -3,6 +3,16 @@ import isDev from 'electron-is-dev';
 import { app, BrowserWindow } from 'electron';
 import { win_cfg } from 'util/window';
 
+/**
+ * All IPC calls are collected below.
+ * This import is needed here for proper
+ * execution of IPC in the main process.
+ */
+import 'server/ipc/ipc.channels';
+
+// runs db init IIFE
+import 'db/db';
+
 // registers main weback bundles??
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
 process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = true;
@@ -39,17 +49,6 @@ export function createWindow() {
     //     });
   }
 }
-
-/**
- * All IPC calls are collected below.
- * This import is needed here for proper
- * execution of IPC in the main process.
- */
-import 'server/ipc/ipc.channels';
-import { lowInit } from 'db/db';
-(async function () {
-  lowInit();
-})();
 
 app.allowRendererProcessReuse = true;
 app.disableHardwareAcceleration();

@@ -16,7 +16,7 @@ const file = join(
 export const db = new Low<Data>(new JSONFile<Data>(file));
 
 // Read data from JSON file, this will set db.data content
-export async function lowInit() {
+(async function dbInit() {
   try {
     await db.read();
 
@@ -39,4 +39,4 @@ export async function lowInit() {
   } catch (error) {
     console.log(<Error>error.message);
   }
-}
+})();
