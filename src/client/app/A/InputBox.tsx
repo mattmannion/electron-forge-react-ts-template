@@ -57,7 +57,7 @@ export function InputBox({ setPosts }: InputBox) {
       content: yup.string().required('Must enter some content'),
     }),
 
-    onSubmit: async function ({ title, content }) {
+    onSubmit: function ({ title, content }) {
       submit(setPosts, title, content);
       resetForm();
     },

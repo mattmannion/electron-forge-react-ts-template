@@ -12,7 +12,7 @@ export function A() {
   ]);
 
   useEffect(() => {
-    ipcRenderer.send(chan.message.send, 'a message from react');
+    ipcRenderer.send(chan.message.send, 'A');
     ipcRenderer.send(chan.db.posts.read.many.send);
 
     ipcRenderer.on(chan.message.receive, (_e, data) => setMessage(data));
@@ -20,11 +20,16 @@ export function A() {
       setPosts(data)
     );
 
+    // ipc cleanup
     return () => {
       ipcRenderer.removeAllListeners(chan.message.send);
       ipcRenderer.removeAllListeners(chan.message.receive);
+      ipcRenderer.removeAllListeners(chan.db.posts.insert.one.send);
+      ipcRenderer.removeAllListeners(chan.db.posts.insert.one.receive);
       ipcRenderer.removeAllListeners(chan.db.posts.read.many.send);
       ipcRenderer.removeAllListeners(chan.db.posts.read.many.receive);
+      ipcRenderer.removeAllListeners(chan.db.posts.edit.one.send);
+      ipcRenderer.removeAllListeners(chan.db.posts.edit.one.receive);
       ipcRenderer.removeAllListeners(chan.db.posts.delete.one.send);
       ipcRenderer.removeAllListeners(chan.db.posts.delete.one.receive);
     };
@@ -32,18 +37,7 @@ export function A() {
 
   return (
     <div className='center'>
-      <div>A</div>
-      <br />
-      {/* <div>{message}</div> */}
-      <button
-        className='btn'
-        onClick={() => {
-          ipcRenderer.send(chan.message.send, 'a message from react');
-        }}
-      >
-        send something
-      </button>
-      <br />
+      <div>{message}</div>
       <InputBox setPosts={setPosts} />
       <Posts
         setPosts={setPosts}
