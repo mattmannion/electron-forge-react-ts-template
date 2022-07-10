@@ -3,16 +3,13 @@ import { join, dirname } from 'path';
 import { Low, JSONFile } from 'lowdb';
 import { fileURLToPath } from 'url';
 import { v4 } from 'uuid';
+import { CatchError } from 'util/util';
 
 interface Data {
   posts: Post[];
 }
 
-const file = join(
-  dirname(fileURLToPath(import.meta.url)),
-  'database',
-  'db.json'
-);
+const file = join(dirname(fileURLToPath(import.meta.url)), 'db.json');
 export const db = new Low<Data>(new JSONFile<Data>(file));
 
 // Read data from JSON file, this will set db.data content
@@ -37,6 +34,6 @@ export const db = new Low<Data>(new JSONFile<Data>(file));
     // Write db.data content to db.json
     await db.write();
   } catch (error) {
-    console.log(<Error>error.message);
+    CatchError(error);
   }
 })();
