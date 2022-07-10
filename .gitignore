@@ -1,5 +1,7 @@
 # Custom
-src/db/database
+src/db/database/db.json
+
+.env
 
 # Logs
 logs
