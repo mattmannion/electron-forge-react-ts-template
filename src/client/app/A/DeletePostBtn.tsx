@@ -16,8 +16,8 @@ function delete_post(
 ) {
   e.preventDefault();
 
-  ipcRenderer.send(chan.db.posts.delete.one.send, del_id);
-  ipcRenderer.on(chan.db.posts.delete.one.receive, (e, data) => setPosts(data));
+  ipcRenderer.send(chan.db.posts.delete.one.s, del_id);
+  ipcRenderer.on(chan.db.posts.delete.one.r, (e, data) => setPosts(data));
 
   handleClose();
 }

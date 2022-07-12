@@ -4,16 +4,16 @@ import { v4 } from 'uuid';
 import { chan } from 'util/ipc.registry';
 import { CatchError } from 'util/util';
 
-ipcMain.on(chan.db.posts.read.many.send, async (e) => {
+ipcMain.on(chan.db.posts.read.many.s, async (e) => {
   try {
     await db.read();
-    e.sender.send(chan.db.posts.read.many.receive, db.data.posts);
+    e.sender.send(chan.db.posts.read.many.r, db.data.posts);
   } catch (error) {
     CatchError(error);
   }
 });
 
-ipcMain.on(chan.db.posts.delete.one.send, async (e, del_id) => {
+ipcMain.on(chan.db.posts.delete.one.s, async (e, del_id) => {
   try {
     await db.read();
 
@@ -21,13 +21,13 @@ ipcMain.on(chan.db.posts.delete.one.send, async (e, del_id) => {
 
     await db.write();
 
-    e.sender.send(chan.db.posts.delete.one.receive, db.data.posts);
+    e.sender.send(chan.db.posts.delete.one.r, db.data.posts);
   } catch (error) {
     CatchError(error);
   }
 });
 
-ipcMain.on(chan.db.posts.edit.one.send, async (e, id, title, content) => {
+ipcMain.on(chan.db.posts.edit.one.s, async (e, id, title, content) => {
   try {
     await db.read();
 
@@ -50,13 +50,13 @@ ipcMain.on(chan.db.posts.edit.one.send, async (e, id, title, content) => {
 
     await db.write();
 
-    e.sender.send(chan.db.posts.edit.one.receive, db.data.posts);
+    e.sender.send(chan.db.posts.edit.one.r, db.data.posts);
   } catch (error) {
     CatchError(error);
   }
 });
 
-ipcMain.on(chan.db.posts.insert.one.send, async (e, title, content) => {
+ipcMain.on(chan.db.posts.insert.one.s, async (e, title, content) => {
   try {
     await db.read();
 
@@ -68,7 +68,7 @@ ipcMain.on(chan.db.posts.insert.one.send, async (e, title, content) => {
 
     await db.write();
 
-    e.sender.send(chan.db.posts.insert.one.receive, db.data.posts);
+    e.sender.send(chan.db.posts.insert.one.r, db.data.posts);
   } catch (error) {
     CatchError(error);
   }

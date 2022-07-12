@@ -21,7 +21,7 @@ if (require('electron-squirrel-startup')) {
   app.quit();
 }
 
-export function createWindow() {
+function createWindow() {
   const mainWindow = new BrowserWindow({
     ...win_cfg({ hh: 720, ww: 950, xx: 1, yy: 0 }),
     webPreferences: {

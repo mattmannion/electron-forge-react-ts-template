@@ -31,10 +31,8 @@ function submit(
   title: string,
   content: string
 ) {
-  ipcRenderer.send(chan.db.posts.insert.one.send, title, content);
-  ipcRenderer.on(chan.db.posts.insert.one.receive, (_e, data) =>
-    setPosts(data)
-  );
+  ipcRenderer.send(chan.db.posts.insert.one.s, title, content);
+  ipcRenderer.on(chan.db.posts.insert.one.r, (_e, data) => setPosts(data));
 }
 
 export function InputBox({ setPosts }: InputBox) {

@@ -35,8 +35,8 @@ function submit(
   title: string,
   content: string
 ) {
-  ipcRenderer.send(chan.db.posts.edit.one.send, id, title, content);
-  ipcRenderer.on(chan.db.posts.edit.one.receive, (_e, data) => setPosts(data));
+  ipcRenderer.send(chan.db.posts.edit.one.s, id, title, content);
+  ipcRenderer.on(chan.db.posts.edit.one.r, (_e, data) => setPosts(data));
 }
 
 export function EditPostModal({ setPosts, id, title, content }: EditPostModal) {
