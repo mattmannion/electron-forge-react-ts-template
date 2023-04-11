@@ -1,6 +1,7 @@
 import type { Post } from 'db/db.types';
 import { join, dirname } from 'path';
-import { Low, JSONFile } from 'lowdb';
+import { Low } from 'lowdb';
+import { JSONFile } from 'lowdb/node';
 import { fileURLToPath } from 'url';
 import { v4 } from 'uuid';
 import { CatchError } from 'util/util';

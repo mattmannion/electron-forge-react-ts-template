@@ -1,8 +1,8 @@
 import 'client/sass/scss/bs';
 import 'client/sass/scss';
 require('dotenv').config();
-import { render } from 'react-dom';
-import { MemoryRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { createRoot } from 'react-dom/client';
+import { MemoryRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { A } from 'client/app/A/A';
 import { B } from 'client/app/B/B';
 
@@ -13,13 +13,12 @@ const Nav = () => (
   </div>
 );
 
-render(
+createRoot(document.getElementById('root')).render(
   <Router>
     <Nav />
-    <Switch>
-      <Route exact path='/' component={A} />
-      <Route exact path='/b' component={B} />
-    </Switch>
-  </Router>,
-  document.getElementById('root')
+    <Routes>
+      <Route path='/' Component={A} />
+      <Route path='/b' Component={B} />
+    </Routes>
+  </Router>
 );
