@@ -31,6 +31,7 @@ function createWindow() {
   });
 
   // I guess this loads webpack bundles??
+  // mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
   // Allows this block of code to be disabled in prod

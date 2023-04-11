@@ -1,6 +1,10 @@
 #!/bin/bash
 
 #must have gwsl installed for this to work
-export DISPLAY="$(grep nameserver /etc/resolv.conf | sed 's/nameserver //'):0"
+# vcxserver
+# export DISPLAY="$(grep nameserver /etc/resolv.conf | sed 's/nameserver //'):0"
+
+# normal
+export DISPLAY=:0
 
 npm run n 
